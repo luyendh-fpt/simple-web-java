@@ -8,6 +8,7 @@ public class Student {
     private String fullName;
     private String address;
     private String phone;
+    private boolean vipMember;
     private int role; // 1. user | 2. admin.
     private int status; // 0. deactive | 1. active | -1. deleted
 
@@ -68,6 +69,14 @@ public class Student {
             }
             return null;
         }
+    }
+
+    public boolean isVipMember() {
+        return vipMember;
+    }
+
+    public void setVipMember(boolean vipMember) {
+        this.vipMember = vipMember;
     }
 
     public String getUsername() {

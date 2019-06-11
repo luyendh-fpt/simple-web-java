@@ -65,6 +65,15 @@
         <url-pattern>/admin</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>VipAreaController</servlet-name>
+        <servlet-class>com.t1708m.controller.VipAreaController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>VipAreaController</servlet-name>
+        <url-pattern>/vip-area</url-pattern>
+    </servlet-mapping>
+
     <filter>
         <filter-name>AuthenticationFilter</filter-name>
         <filter-class>com.t1708m.filter.AuthenticationFilter</filter-class>
