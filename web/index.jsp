@@ -12,6 +12,7 @@
   </head>
   <body>
   This is Content New 2
+  <a href="/login">Login page</a>
   <form method="post" action="/test">
       Email <input type="text" name="email">
     <input type="submit" value="Submit">

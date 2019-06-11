@@ -25,8 +25,10 @@ public class MemberFilter implements Filter {
                 || student.getRole() == Student.Role.ADMIN.getValue())) {
             filterChain.doFilter(request, response);
         } else {
-            response.setStatus(HttpServletResponse.SC_FORBIDDEN);
-            response.getWriter().print("Permission denied");
+            request.setAttribute("code", HttpServletResponse.SC_FORBIDDEN);
+            request.setAttribute("message", "Permission deny.");
+            request.setAttribute("content", "Bạn không có quyền truy cập trang này. Vui lòng đăng nhập.");
+            request.getRequestDispatcher("/error.jsp").forward(request, response);
         }
     }
 

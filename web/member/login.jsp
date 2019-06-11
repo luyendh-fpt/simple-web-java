@@ -11,6 +11,7 @@
     if(student == null){
         student = new Student();
     }
+    String referer = String.valueOf(request.getAttribute("referer"));
 %>
 <html>
 <head>
@@ -20,6 +21,7 @@
     <h1>Login page</h1>
     <%= student.getUsername()%>
     <form action="/login" method="post">
+        <input type="hidden" name="referer" value="<%= referer%>">
         <div>
             Username <input type="text" name="username">
         </div>

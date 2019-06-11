@@ -19,6 +19,7 @@
 </head>
 <body>
     <h1>Register page</h1>
+    <a href="/login">Login page</a>
     <form action="/register" method="post">
         <div>
             Username <input type="text" name="username" value="<%=student.getUsername()%>">

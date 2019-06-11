@@ -14,21 +14,9 @@ public class LoginController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("Hello Login");
-        String message = (String) req.getAttribute("message");
-        String message2 = (String) req.getAttribute("message2");
-        System.out.println(message);
-        System.out.println(message2);
-//        Cookie[] cookies = req.getCookies();
-//        if(cookies != null){
-//            for (Cookie cookie :
-//                    cookies) {
-//                System.out.println(cookie.getName() + " - " + cookie.getValue() + " - " + cookie.getDomain());
-//            }
-//        }
-//        HttpSession session =  req.getSession();
-//        Student student = (Student) session.getAttribute("currentLoggedIn");
-//        req.setAttribute("student", student);
+        String referrer = req.getHeader("referer");
+        System.out.println("Redirect từ trang: " + referrer);
+        req.setAttribute("referer", referrer);
         req.getRequestDispatcher("/member/login.jsp").forward(req, resp);
     }
 
@@ -38,21 +26,27 @@ public class LoginController extends HttpServlet {
         resp.setCharacterEncoding("UTF-8");
         String inputPassword = req.getParameter("password");
         String inputUsername = req.getParameter("username");
+        String referer = req.getParameter("referer");
         Student student = model.findByUsernameAndStatus(inputUsername, Student.Status.ACTIVE);
         if (student == null) {
-            resp.setStatus(404);
-            resp.getWriter().println("Tài khoản không tồn tại hoặc đã bị xoá.");
+            req.setAttribute("code", HttpServletResponse.SC_NOT_FOUND);
+            req.setAttribute("message", "Tài khoản không tồn tại hoặc đã bị xoá.");
+            req.setAttribute("content", "Vui lòng liên hệ ban quản trị để biết thêm chi tiết");
+            req.getRequestDispatcher("/error.jsp").forward(req, resp);
         } else {
             // mã hoá password với salt lấy ra từ database trước khi so sánh.
             if (inputPassword.equals(student.getPassword())) {
                 HttpSession session = req.getSession();
                 session.setAttribute(ApplicationConstant.CURRENT_LOGGED_IN, student);
-                resp.setStatus(200);
-                resp.getWriter().println("Login thành công");
+                resp.sendRedirect(referer);
             } else {
-                resp.setStatus(401);
-                resp.getWriter().println("Sai thông tin tài khoản.");
+                req.setAttribute("code", HttpServletResponse.SC_UNAUTHORIZED);
+                req.setAttribute("message", "Sai thông tin tài khoản.");
+                req.setAttribute("content", "Vui lòng liên hệ ban quản trị để biết thêm chi tiết");
+                req.getRequestDispatcher("/error.jsp").forward(req, resp);
             }
         }
+
+
     }
 }
