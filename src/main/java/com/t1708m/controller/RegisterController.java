@@ -34,6 +34,8 @@ public class RegisterController extends HttpServlet {
         String address = req.getParameter("address");
         String phone = req.getParameter("phone");
         int role = Integer.parseInt(req.getParameter("role"));
+        String vipMember = req.getParameter("vipMember");
+        System.out.println(vipMember);
 
         Student student = new Student();
         student.setUsername(username);
@@ -42,6 +44,7 @@ public class RegisterController extends HttpServlet {
         student.setEmail(email);
         student.setAddress(address);
         student.setPhone(phone);
+        student.setVipMember(vipMember.equals("on") ? true : false);
         student.setRole(Student.Role.findByValue(role));
         student.setStatus(Student.Status.ACTIVE);
         model.save(student);

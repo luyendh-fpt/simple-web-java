@@ -14,7 +14,7 @@ public class VipAreaController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.getWriter().println("Admin area! MUST logged in with admin role");
+        resp.getWriter().println("VIP area! MUST pay for this.");
     }
 
 }

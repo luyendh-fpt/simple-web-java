@@ -16,6 +16,9 @@ public class LoginController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String referrer = req.getHeader("referer");
         System.out.println("Redirect từ trang: " + referrer);
+        if(referrer == null){
+            referrer = "/";
+        }
         req.setAttribute("referer", referrer);
         req.getRequestDispatcher("/member/login.jsp").forward(req, resp);
     }

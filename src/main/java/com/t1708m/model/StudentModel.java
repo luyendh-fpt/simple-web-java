@@ -23,6 +23,8 @@ public class StudentModel {
                 String rsPhone = resultSet.getString("phone");
                 int rsStatus = resultSet.getInt("status");
                 int rsRole = resultSet.getInt("role");
+                int rsVipMember = resultSet.getInt("vipMember");
+                System.out.println("rsVipMember:" + rsVipMember);
                 Student student = new Student();
                 student.setUsername(rsUsername);
                 student.setPassword(rsPassword);
@@ -32,6 +34,7 @@ public class StudentModel {
                 student.setPhone(rsPhone);
                 student.setStatus(Student.Status.findByValue(rsStatus));
                 student.setRole(Student.Role.findByValue(rsRole));
+                student.setVipMember(rsVipMember == 1 ? true : false);
                 return student;
             }
         } catch (SQLException ex) {
@@ -75,6 +78,8 @@ public class StudentModel {
                 String rsAddress = resultSet.getString("address");
                 int rsStatus = resultSet.getInt("status");
                 int rsRole = resultSet.getInt("role");
+                int rsVipMember = resultSet.getInt("vipMember");
+                System.out.println("rsVipMember:" + rsVipMember);
                 Student student = new Student();
                 student.setUsername(rsUsername);
                 student.setPassword(rsPassword);
@@ -84,6 +89,7 @@ public class StudentModel {
                 student.setPhone(rsPhone);
                 student.setStatus(Student.Status.findByValue(rsStatus));
                 student.setRole(Student.Role.findByValue(rsRole));
+                student.setVipMember(rsVipMember == 1 ? true : false);
                 results.add(student);
             }
         } catch (SQLException ex) {

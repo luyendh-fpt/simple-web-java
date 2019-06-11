@@ -31,6 +31,9 @@
             Confirm Password <input type="password" name="confirmPassword">
         </div>
         <div>
+            Vip member <input type="checkbox" name="vipMember" <%= student.isVipMember() ? "checked" : ""%>>
+        </div>
+        <div>
             Role
             <select name="role">
                 <%
